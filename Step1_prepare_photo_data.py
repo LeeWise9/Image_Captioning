@@ -37,7 +37,7 @@ def extract_features(directory):
         print('>正在处理：',img_name)
     return features
 
-directory = '..\Image_Captioning\Flickr8k_Dataset'
+directory = 'Flickr8k_Dataset'
 features  = extract_features(directory)
 dump(features, open('features.pkl', 'wb'))     # 保存文件
 print('图片特征提取完成，文件已保存！')
