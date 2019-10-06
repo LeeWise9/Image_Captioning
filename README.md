@@ -48,14 +48,14 @@ Flickr8k_Dataset数据集中包含图片名和对应的描述文本，用空格�
 你可能难以理解为什么要将描述文本作为输入的一部分，为什么不直接把图片特征作为X_train，图片描述作为y_train。原因是这样预测效果并不好。描述文本中的词语包含着内在的先后顺序，但是图片特征不包含。要想让神经网络看到图片“说人话”，还得考虑使用LSTM处理一下描述文本，加入训练。
 
 通常来说，LSTM的输入不能为空，且在获取输入之后，每一次都只输出一个单词。为了让输入不为空，考虑在文本首端添加统一标识符“startseq”，为了使LSTM在适当的时侯停止输出，输入的描述文本需要添加统一尾端标识符“endseq”。为了让神经网络习得语言顺序的精髓，需要构建上下文结构，即拆分句子。不算首尾标识符，一段包含n个单词的文字描述需要构建n+1对上下文结构。
->         Input                       |       Output<br>
->startseq                             |       a<br>
->startseq a                           |       cat<br>
->startseq a cat                       |       sits<br>
->startseq a cat sits                  |       on<br>
->startseq a cat sits on               |       the<br>
->startseq a cat sits on the           |       table<br>
->startseq a cat sits on the table     |       endseq<br>
+>          Input                       |       Output<br>
+> startseq                             |       a<br>
+> startseq a                           |       cat<br>
+> startseq a cat                       |       sits<br>
+> startseq a cat sits                  |       on<br>
+> startseq a cat sits on               |       the<br>
+> startseq a cat sits on the           |       table<br>
+> startseq a cat sits on the table     |       endseq<br>
 
 最终的网络结构如下图所示。<br>
 ![网络结构](https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/Plot-of-the-Caption-Generation-Deep-Learning-Model.png)
