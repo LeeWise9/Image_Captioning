@@ -9,4 +9,4 @@ This is a neural network project. The expected function is to generate descripti
 
 ## Step1 提取图片特征<br>
 本项目使用预先训练好的VGG16来提取图片特征。为了适配该项目，VGG16模型最后一层被去掉，输出为一个1×4096的向量。<br>
-![VGG16](https://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=vgg16&step_word=&hs=0&pn=3&spn=0&di=7150&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=0&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=undefined&cs=3696184893%2C61316082&os=2494690748%2C1936766418&simid=0%2C0&adpicid=0&lpn=0&ln=91&fr=&fmq=1570374575871_R&fm=&ic=undefined&s=undefined&hd=undefined&latest=undefined&copyright=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fws1.sinaimg.cn%2Flarge%2F662f5c1fgy1frnjdmk4n5j21710pc46d.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fks52_z%26e3Bvf1g_z%26e3BgjpAzdH3FoitsjaAzdH3Fw6ptvsjAzdH3F1jpwtsfAzdH3Fblnmadbm&gsm=&rpstart=0&rpnum=0&islist=&querylist=&force=undefined"VGG16")
+![VGG16](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570385062326&di=c2aaf62c394a72b2a97b1793d9b2de26&imgtype=0&src=http%3A%2F%2Fws1.sinaimg.cn%2Flarge%2F662f5c1fgy1frnjdmk4n5j21710pc46d.jpg)
