@@ -15,32 +15,34 @@ This is a neural network project. The expected function is to generate descripti
 
 ## Step2 描述文本预处理<br>
 Flickr8k_Dataset数据集中包含图片名和对应的描述文本，用空格分割，以.txt形式保存。其中，一张图片有5段不同文字描述。<br>
->1000268201_693b08cb0e.jpg#0	A child in a pink dress is climbing up a set of stairs in an entry way .
->1000268201_693b08cb0e.jpg#1	A girl going into a wooden building .
->1000268201_693b08cb0e.jpg#2	A little girl climbing into a wooden playhouse .
->1000268201_693b08cb0e.jpg#3	A little girl climbing the stairs to her playhouse .
->1000268201_693b08cb0e.jpg#4	A little girl in a pink dress going into a wooden cabin .
->1001773457_577c3a7d70.jpg#0	A black dog and a spotted dog are fighting
->1001773457_577c3a7d70.jpg#1	A black dog and a tri-colored dog playing with each other on the road .
->1001773457_577c3a7d70.jpg#2	A black dog and a white dog with brown spots are staring at each other in the street .
->1001773457_577c3a7d70.jpg#3	Two dogs of different breeds looking at each other on the road .
->1001773457_577c3a7d70.jpg#4	Two dogs on pavement moving toward each other .
->1002674143_1b742ab4b8.jpg#0	A little girl covered in paint sits in front of a painted rainbow with her hands in a bowl .
->1002674143_1b742ab4b8.jpg#1	A little girl is sitting in front of a large painted rainbow .
+>1000268201_693b08cb0e.jpg#0	A child in a pink dress is climbing up a set of stairs in an entry way .<br>
+>1000268201_693b08cb0e.jpg#1	A girl going into a wooden building .<br>
+>1000268201_693b08cb0e.jpg#2	A little girl climbing into a wooden playhouse .<br>
+>1000268201_693b08cb0e.jpg#3	A little girl climbing the stairs to her playhouse .<br>
+>1000268201_693b08cb0e.jpg#4	A little girl in a pink dress going into a wooden cabin .<br>
+>1001773457_577c3a7d70.jpg#0	A black dog and a spotted dog are fighting<br>
+>1001773457_577c3a7d70.jpg#1	A black dog and a tri-colored dog playing with each other on the road .<br>
+>1001773457_577c3a7d70.jpg#2	A black dog and a white dog with brown spots are staring at each other in the street .<br>
+>1001773457_577c3a7d70.jpg#3	Two dogs of different breeds looking at each other on the road .<br>
+>1001773457_577c3a7d70.jpg#4	Two dogs on pavement moving toward each other .<br>
+>1002674143_1b742ab4b8.jpg#0	A little girl covered in paint sits in front of a painted rainbow with her hands in a bowl .<br>
+>1002674143_1b742ab4b8.jpg#1	A little girl is sitting in front of a large painted rainbow .<br>
 >...
+
 预处理工作需要去除图片名称尾缀，并且清洗描述文本，比如将拼写转为小写，去除停顿词、数字、单个字母等。<br>
->1000268201_693b08cb0e child in pink dress is climbing up set of stairs in an entry way
->1000268201_693b08cb0e girl going into wooden building
->1000268201_693b08cb0e little girl climbing into wooden playhouse
->1000268201_693b08cb0e little girl climbing the stairs to her playhouse
->1000268201_693b08cb0e little girl in pink dress going into wooden cabin
->1001773457_577c3a7d70 black dog and spotted dog are fighting
->1001773457_577c3a7d70 black dog and tricolored dog playing with each other on the road
->1001773457_577c3a7d70 black dog and white dog with brown spots are staring at each other in the street
->1001773457_577c3a7d70 two dogs of different breeds looking at each other on the road
->1001773457_577c3a7d70 two dogs on pavement moving toward each other
->1002674143_1b742ab4b8 little girl covered in paint sits in front of painted rainbow with her hands in bowl
->1002674143_1b742ab4b8 little girl is sitting in front of large painted rainbow
->...
+
+>1000268201_693b08cb0e child in pink dress is climbing up set of stairs in an entry way<br>
+>1000268201_693b08cb0e girl going into wooden building<br>
+>1000268201_693b08cb0e little girl climbing into wooden playhouse<br>
+>1000268201_693b08cb0e little girl climbing the stairs to her playhouse<br>
+>1000268201_693b08cb0e little girl in pink dress going into wooden cabin<br>
+>1001773457_577c3a7d70 black dog and spotted dog are fighting<br>
+>1001773457_577c3a7d70 black dog and tricolored dog playing with each other on the road<br>
+>1001773457_577c3a7d70 black dog and white dog with brown spots are staring at each other in the street<br>
+>1001773457_577c3a7d70 two dogs of different breeds looking at each other on the road<br>
+>1001773457_577c3a7d70 two dogs on pavement moving toward each other<br>
+>1002674143_1b742ab4b8 little girl covered in paint sits in front of painted rainbow with her hands in bowl<br>
+>1002674143_1b742ab4b8 little girl is sitting in front of large painted rainbow<br>
+>...<br>
 
 ## Step3 构建模型并训练模型
