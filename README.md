@@ -11,6 +11,8 @@ This is a neural network project. The expected function is to generate descripti
 #### 3.构建模型并训练；<br>
 #### 4.评估模型并为图片生成描述。<br>
 
+
+
 ## Step1 提取图片特征<br>
 本项目使用预先训练好的VGG16来提取图片特征。为了适配该项目，至少要注意两点面：1.要对图片做预处理，包括图片缩放、增维和去均值化；2.去掉VGG16的最后一层（1000的全连接层和softmax激活层），使输出为一个1维的长度为4096的向量。<br>
 <p align="center">
