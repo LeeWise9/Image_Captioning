@@ -77,15 +77,8 @@ Flickr8k_Dataset数据集中包含图片名和对应的描述文本，用空格�
 
 比如对于下图：<br>
 <p align="center">
-	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570433768004&di=be7014df2854ffedd1bdeb6e8afb1eb6&imgtype=0&src=http%3A%2F%2Fphotocdn.sohu.com%2F20150717%2FImg416970808.jpg" alt="Sample"  width="500">
+	<img src="https://github.com/LeeWise9/Img_repositories/blob/master/example.jpg" alt="Sample"  width="500">
 </p>
 
-模型的输出为：。
-
-
-
-
-
-
-
-
+模型的输出为：“dog is running through the water”。<br>
+你觉得怎么样呢？
