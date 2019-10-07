@@ -12,7 +12,7 @@ This is a neural network project. The expected function is to generate descripti
 #### 4.评估模型并为图片生成描述。<br>
 
 ## Step1 提取图片特征<br>
-本项目使用预先训练好的VGG16来提取图片特征。为了适配该项目，至少要注意两点面：1.要对图片做预处理，包括图片缩放、增维和去均值化；2.去掉VGG16的最后一层（1000的全连接层和softmax激活层），使输出为一个1×4096的向量。<br>
+本项目使用预先训练好的VGG16来提取图片特征。为了适配该项目，至少要注意两点面：1.要对图片做预处理，包括图片缩放、增维和去均值化；2.去掉VGG16的最后一层（1000的全连接层和softmax激活层），使输出为一个1维的长度为4096的向量。<br>
 <p align="center">
 	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570385062326&di=c2aaf62c394a72b2a97b1793d9b2de26&imgtype=0&src=http%3A%2F%2Fws1.sinaimg.cn%2Flarge%2F662f5c1fgy1frnjdmk4n5j21710pc46d.jpg" alt="Sample"  width="500">
 </p>
@@ -70,9 +70,17 @@ Flickr8k_Dataset数据集中包含图片名和对应的描述文本，用空格�
 
 实际训练中，需要加载大量数据，为了减少内存开销，本项目采取逐步加载训练数据的方法。如果读者的计算机有32GB及以上的内存，可以考虑将代码改写为一次性读入所有数据，这样可以大幅提升训练速度减少训练时间。
 
-## 4.评估模型并为图片生成描述<br>
+## Step4.评估模型并为图片生成描述<br>
+常规的评价模型性能的方法很多，对于语言模型，常用的评估方法为[BLEU](https://blog.csdn.net/allocator/article/details/79657792)。BLEU是一个非常简单快速粗略的评估指标, 最初被用于评价机器翻译效果，当面对多个翻译模型且需要快速选择模型的场景, 可以使用这个指标来评估模型的好坏。BLEU的本质是计算两段的相似程度，可以用来评估看图说话模型的好坏。其评价值介于0到1之间，值越接近于1则两个句子越相似。
 
+另一种评估方法是对一张图片生成一段描述，让读者主观的判断生成的句子是否合理。
 
+比如对于下图：<br>
+<p align="center">
+	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570433768004&di=be7014df2854ffedd1bdeb6e8afb1eb6&imgtype=0&src=http%3A%2F%2Fphotocdn.sohu.com%2F20150717%2FImg416970808.jpg" alt="Sample"  width="500">
+</p>
+
+模型的输出为：。
 
 
 
