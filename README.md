@@ -6,10 +6,10 @@ This is a neural network project. The expected function is to generate descripti
 看图说话是典型的端到端学习，输入端为图片特征（Step3中会详细讲解），期望得到的输出则是图片对应的内容描述。所以要求数据集中既包含图片，又包含对应的描述用于训练。该项目数据集来自Flickr8k_Dataset，读者可以在kaggle搜索下载：[Kaggle_Flickr8k](https://www.kaggle.com/shadabhussain/flickr8k)。
 
 本项目主要包含四个部分：<br>
-1.使用VGG16提取图片特征并保存为文件；<br>
-2.预处理数据集中的描述文本并保存为文件；<br>
-3.构建模型并训练；<br>
-4.评估模型并为图片生成描述。<br>
+### 1.使用VGG16提取图片特征并保存为文件；<br>
+### 2.预处理数据集中的描述文本并保存为文件；<br>
+### 3.构建模型并训练；<br>
+### 4.评估模型并为图片生成描述。<br>
 
 ## Step1 提取图片特征<br>
 本项目使用预先训练好的VGG16来提取图片特征。为了适配该项目，至少要注意两点面：1.要对图片做预处理，包括图片缩放、增维和去均值化；2.去掉VGG16的最后一层（1000的全连接层和softmax激活层），使输出为一个1×4096的向量。<br>
@@ -18,7 +18,7 @@ This is a neural network project. The expected function is to generate descripti
 </p>
 
 提取到的特征可以用字典形式储存。当目标文件夹中的所有图片都完成了特征提取操作之后，结果将被保存为.pkl文件，以方便后续调用。<br>
-除了使用VGG16，读者还可以尝试使用其他的预训练网络进行尝试，比如ResNet50。
+除了使用VGG16，读者还可以尝试使用其他的预训练网络进行尝试，比如ResNet50等。
 
 ## Step2 描述文本预处理<br>
 Flickr8k_Dataset数据集中包含图片名和对应的描述文本，用空格分割，以.txt形式保存。其中，一张图片有5段不同文字描述。<br>
@@ -47,7 +47,7 @@ Flickr8k_Dataset数据集中包含图片名和对应的描述文本，用空格�
 处理好的文本同样使用.txt文件形式保存，方便后续调用。
 
 ## Step3 构建模型并训练
-网络包含两部分输入：图片特征和描述文本。<br>
+网络包含两部分输入：图片特征和描述文本（单词串）。<br>
 <p align="center">
 	<img src="https://github.com/LeeWise9/Img_repositories/blob/master/%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84.jpg" alt="Sample"  width="500">
 </p>
@@ -59,7 +59,7 @@ Flickr8k_Dataset数据集中包含图片名和对应的描述文本，用空格�
 	<img src="https://github.com/LeeWise9/Img_repositories/blob/master/%E4%B8%8A%E4%B8%8B%E6%96%87%E7%BB%93%E6%9E%84.jpg" alt="Sample"  width="500">
 </p>
 
-任何一段句子，其第一个输入词一定是“startseq”，再陆续输入每个单词。比如上述句子为“a cat sits on the table”，则按照上下文规则分别进行7次输入和输出，最后一次的输出为“endseq”。这样不会造成数据泄露，出现在输入中的词汇一定是在输出端作为标签先出现的。比如“sits”这个单词作为输入，前提是上一轮的output中已经包含了这个单词。
+任何一段句子，其第一个输入词一定是“startseq”，再陆续输入每个单词。上述句子“a cat sits on the table”，按照上下文规则分别进行了7次输入和输出，最后一次的输出为“endseq”。这样不会造成数据泄露，出现在输入中的词汇一定是在输出端作为标签先出现的。比如“startseq a cat sits”这段输入中的“sits”这个单词，上一轮的output中已经作为y_train出现过了。
 
 上述部分是为了解释清楚为什么将描述文本作为输入。下面讲解如何合并图片特征和图片描述。先来看一下网络结构，如下图所示。<br>
 <p align="center">
