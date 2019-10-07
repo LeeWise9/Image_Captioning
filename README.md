@@ -43,8 +43,7 @@ Flickr8k_Dataset数据集中包含图片名和对应的描述文本，用空格�
 
 ## Step3 构建模型并训练
 网络包含两部分输入：图片特征和描述文本。<br>
-<div align="center">![网络结构](https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/Schematic-of-the-Merge-Model-For-Image-Captioning.png
-<div align="center">
+![网络结构](https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/Schematic-of-the-Merge-Model-For-Image-Captioning.png)
 
 你可能难以理解为什么要将描述文本作为输入的一部分，为什么不直接把图片特征作为X_train，图片描述作为y_train。原因是这样预测效果并不好。描述文本中的词语包含着内在的先后顺序，但是图片特征不包含。要想让神经网络看到图片“说人话”，还得考虑使用LSTM处理一下描述文本，加入训练。
 
