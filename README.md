@@ -5,7 +5,11 @@ This is a neural network project. The expected function is to generate descripti
 
 看图说话是典型的端到端学习，输入端为图片特征（Step3中会详细讲解），期望得到的输出则是图片对应的内容描述。所以要求数据集中既包含图片，又包含对应的描述用于训练。该项目数据集来自Flickr8k_Dataset，读者可以在kaggle搜索下载：[Kaggle_Flickr8k](https://www.kaggle.com/shadabhussain/flickr8k)。
 
-本项目主要包含四个部分：1.使用VGG16提取图片特征并保存为文件；2.预处理数据集中的描述文本并保存为文件；3.构建模型并训练；4.评估模型并为图片生成描述。
+本项目主要包含四个部分：<br>
+1.使用VGG16提取图片特征并保存为文件；<br>
+2.预处理数据集中的描述文本并保存为文件；<br>
+3.构建模型并训练；<br>
+4.评估模型并为图片生成描述。<br>
 
 ## Step1 提取图片特征<br>
 本项目使用预先训练好的VGG16来提取图片特征。为了适配该项目，至少要注意两点面：1.要对图片做预处理，包括图片缩放、增维和去均值化；2.去掉VGG16的最后一层（1000的全连接层和softmax激活层），使输出为一个1×4096的向量。<br>
@@ -44,19 +48,25 @@ Flickr8k_Dataset数据集中包含图片名和对应的描述文本，用空格�
 
 ## Step3 构建模型并训练
 网络包含两部分输入：图片特征和描述文本。<br>
-![网络结构](https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/Schematic-of-the-Merge-Model-For-Image-Captioning.png)
+<p align="center">
+	<img src="https://github.com/LeeWise9/Img_repositories/blob/master/%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84.jpg" alt="Sample"  width="500">
+</p>
 
-你可能难以理解为什么要将描述文本作为输入的一部分，为什么不直接把图片特征作为X_train，图片描述作为y_train。原因是这样预测效果并不好。描述文本中的词语包含着内在的先后顺序，但是图片特征不包含。要想让神经网络看到图片“说人话”，还得考虑使用LSTM处理一下描述文本，加入训练。
+你可能难以理解为什么要将描述文本作为输入的一部分，为什么不直接把图片特征作为X_train，图片描述作为y_train。原因是这样预测效果并不好。描述文本中的单词包含着内在的先后顺序，但是图片特征不包含。要想让神经网络看到图片“说人话”，还得考虑使用LSTM处理一下描述文本，加入训练。那么图片描述是不是既要作为X_train又要作为y_train呢？这需要你先了解LSTM的工作原理。
 
-通常来说，LSTM的输入不能为空，且在获取输入之后，每一次都只输出一个单词。为了让输入不为空，考虑在文本首端添加统一标识符“startseq”，为了使LSTM在适当的时侯停止输出，输入的描述文本需要添加统一尾端标识符“endseq”。为了让神经网络习得语言顺序的精髓，需要构建上下文结构，即拆分句子。不算首尾标识符，一段包含n个单词的句子需要构建n+1对上下文结构。<br>
+通常来说，LSTM的输入不能为空，且在获取输入之后，每一次都只输出一个单词。为了让输入不为空，考虑在文本首端添加标识符“startseq”，为了使LSTM在适当的时侯停止输出，输入的描述文本需要添加尾端标识符“endseq”。为了让神经网络习得语言顺序，需要构建上下文结构，即拆分句子。不算首尾标识符，一段包含n个单词的句子需要构建n+1对上下文结构，如下表所示。<br>
 <p align="center">
 	<img src="https://github.com/LeeWise9/Img_repositories/blob/master/%E4%B8%8A%E4%B8%8B%E6%96%87%E7%BB%93%E6%9E%84.jpg" alt="Sample"  width="500">
 </p>
 
-最终的网络结构如下图所示。<br>
+任何一段句子，其第一个输入词一定是“startseq”，再陆续输入每个单词。比如上述句子为“a cat sits on the table”，则按照上下文规则分别进行7次输入和输出，最后一次的输出为“endseq”。这样不会造成数据泄露，出现在输入中的词汇一定是在输出端作为标签先出现的。比如“sits”这个单词作为输入，前提是上一轮的output中已经包含了这个单词。
+
+上述部分是为了解释清楚为什么将描述文本作为输入。下面讲解如何合并图片特征和图片描述。先来看一下网络结构，如下图所示。<br>
 <p align="center">
 	<img src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/Plot-of-the-Caption-Generation-Deep-Learning-Model.png" alt="Sample"  width="500">
 </p>
+
+
 
 读者们可以根据训练情况，自行设计规模更大、参数更多，结构更复杂的模型。
 
